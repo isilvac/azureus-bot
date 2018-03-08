@@ -2,7 +2,7 @@ var util = require('util');
 var builder = require('botbuilder');
 var validators = require('../validators');
 var utils = require('../utils');
-var addressLibrary = require('./address');
+//var addressLibrary = require('./address');
 
 var SettingChoice = {
     Email: 'edit_email',
@@ -74,51 +74,51 @@ lib.dialog('phone', editOptionDialog(
     function (session, phone) { saveSenderSetting(session, 'phoneNumber', phone); }));
 
 // Addresses
-var UseSavedInfoChoices = addressLibrary.UseSavedInfoChoices;
-lib.dialog('addresses', [
-    function (session, args, next) {
+// var UseSavedInfoChoices = addressLibrary.UseSavedInfoChoices;
+// lib.dialog('addresses', [
+//     function (session, args, next) {
 
-        // Check if an option was selected
-        var selection = session.message.text;
-        if (selection.toLowerCase() === session.gettext(UseSavedInfoChoices.Home).toLowerCase() ||
-            selection.toLowerCase() === session.gettext(UseSavedInfoChoices.Work).toLowerCase()) {
-            session.dialogData.selection = selection;
-            return next();
-        }
+//         // Check if an option was selected
+//         var selection = session.message.text;
+//         if (selection.toLowerCase() === session.gettext(UseSavedInfoChoices.Home).toLowerCase() ||
+//             selection.toLowerCase() === session.gettext(UseSavedInfoChoices.Work).toLowerCase()) {
+//             session.dialogData.selection = selection;
+//             return next();
+//         }
 
-        // Show saved addresses
-        session.send('choose_address_to_update');
-        var saved = session.userData.billingAddresses = session.userData.billingAddresses || {};
-        var message = new builder.Message(session)
-            .attachmentLayout(builder.AttachmentLayout.carousel);
-        var homeAddress = saved[session.gettext(UseSavedInfoChoices.Home)];
-        var workAddress = saved[session.gettext(UseSavedInfoChoices.Work)];
-        var notSet = session.gettext('not_set');
-        message.addAttachment(createAddressCard(session, session.gettext(UseSavedInfoChoices.Home), homeAddress || notSet));
-        message.addAttachment(createAddressCard(session, session.gettext(UseSavedInfoChoices.Work), workAddress || notSet));
-        message.addAttachment(new builder.HeroCard(session)
-            .title('not_this_time')
-            .subtitle('do_not_change_addresses')
-            .buttons([
-                builder.CardAction.imBack(session, session.gettext('back'), session.gettext('back_label'))
-            ]));
-        session.send(message);
-    },
-    function (session, args, next) {
-        // Trigger address request dialog
-        session.beginDialog('address:/', {
-            promptMessage: session.gettext('specify_new_address', session.dialogData.selection)
-        });
-    },
-    function (session, args, next) {
-        // Save new address
-        var selection = session.dialogData.selection;
-        var newAddress = args.address;
-        session.userData.billingAddresses = session.userData.billingAddresses || {};
-        session.userData.billingAddresses[selection] = newAddress;
-        session.endDialogWithResult({ updated: true });
-    }
-]);
+//         // Show saved addresses
+//         session.send('choose_address_to_update');
+//         var saved = session.userData.billingAddresses = session.userData.billingAddresses || {};
+//         var message = new builder.Message(session)
+//             .attachmentLayout(builder.AttachmentLayout.carousel);
+//         var homeAddress = saved[session.gettext(UseSavedInfoChoices.Home)];
+//         var workAddress = saved[session.gettext(UseSavedInfoChoices.Work)];
+//         var notSet = session.gettext('not_set');
+//         message.addAttachment(createAddressCard(session, session.gettext(UseSavedInfoChoices.Home), homeAddress || notSet));
+//         message.addAttachment(createAddressCard(session, session.gettext(UseSavedInfoChoices.Work), workAddress || notSet));
+//         message.addAttachment(new builder.HeroCard(session)
+//             .title('not_this_time')
+//             .subtitle('do_not_change_addresses')
+//             .buttons([
+//                 builder.CardAction.imBack(session, session.gettext('back'), session.gettext('back_label'))
+//             ]));
+//         session.send(message);
+//     },
+//     function (session, args, next) {
+//         // Trigger address request dialog
+//         session.beginDialog('address:/', {
+//             promptMessage: session.gettext('specify_new_address', session.dialogData.selection)
+//         });
+//     },
+//     function (session, args, next) {
+//         // Save new address
+//         var selection = session.dialogData.selection;
+//         var newAddress = args.address;
+//         session.userData.billingAddresses = session.userData.billingAddresses || {};
+//         session.userData.billingAddresses[selection] = newAddress;
+//         session.endDialogWithResult({ updated: true });
+//     }
+// ]);
 
 function saveSenderSetting(session, name, value) {
     session.userData.sender = session.userData.sender || {};

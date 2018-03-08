@@ -60,7 +60,6 @@ app.use(function (err, req, res, next) {
 });
 
 // Start listening
-var port = 3978;
-app.listen(port, function () {
-  console.log('Web Server listening on port %s', port);
+app.listen(process.env.port || process.env.PORT || 3978, function () {
+  console.log('Web Server listening on port %s', app.get('port'));
 });
