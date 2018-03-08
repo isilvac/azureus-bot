@@ -1,0 +1,14 @@
+{
+  "title_show_more": "Quieres mas alternativas?",
+  "show_more": "Si por favor!",
+  "select": "Seleccion: ",
+  "unknown_option": "No entendi tu eleccion. Por favor intenta nuevamente.",
+  "choose_category": "Elige una categoria:",
+  "choose_bikes_from_category": "Por favor elige una bicicleta de la categoria \"%s\":",
+  "view_bikes": "Ver bicicletas",
+  "choose_this": "Ver",
+  "more": "Deseas ver mas bicicletas?",
+  "back2menu": "Si deseas volver al menu, escribe \"menu\"",
+  "ok": "OK",
+  "bye": "OK, que tengas un buen dia"
+}

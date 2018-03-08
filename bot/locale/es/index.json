@@ -1,0 +1,15 @@
+{
+  "salute": "Hola! Bienvenido a Bike Store!",
+  "name_request": "Cual es tu nombre?",
+  "salute_with_name": "Hola %s! Bienvenido a Bike Store!",
+  "welcome_title": "Menu Bike Store",
+  "welcome_subtitle": "Aqui encontraras las bicicletas que quieres!",
+  "bike_store": "Bike Store",
+  "main_options_catalog": "Catalogo",
+  "main_options_sns": "Redes Sociales",
+  "main_options_stores": "Tiendas",
+  "main_options_settings": "Configuracion",
+  "help": "Ayuda",
+  "thank_you": "Nos pondremos en contacto pronto. Que tengas un buen dia :)",
+  "bye": "Adios! Que tengas un buen dia"
+}
