@@ -24,15 +24,10 @@ lib.dialog('/', [
         }, 1000);
     },
     function (session, results) {
-        if (results.response === 'no') {
+        if (results.response.toLowerCase() === 'no') {
             builder.Prompts.text(session, session.gettext('back2menu'));
         } else {
             session.beginDialog('/');
-        }
-    },
-    function (session, results) {
-        if (results.response === 'menu') {
-            session.endDialog();
         }
     }
 ]);
