@@ -2,25 +2,13 @@
 var builder = require('botbuilder');
 
 var lib = new builder.Library('catalog');
+
 lib.dialog('/', [
     function (session, args) {
         // Retrieve address, continue to shop
         //session.dialogData.recipientAddress = args.address;
         session.beginDialog('product-selection:/');
     },
-    function (session) {
-        setTimeout(function () {
-            builder.Prompts.text(session, session.gettext('back2menu'));
-        }, 1000);
-    },
-    function (session, results) {
-        if (results.response === 'si') {
-            session.send(session.gettext('ok')).endDialog();
-            session.beginDialog('menu:/');
-        } else {
-            session.send(session.gettext('bye')).endConversation();
-        }
-    }
     //function (session) {
     //    // Ask for delivery address using 'address' library
     //    session.beginDialog('address:/',
@@ -64,7 +52,9 @@ lib.dialog('/', [
     //    console.log('order', order);
     //    session.beginDialog('checkout:/', { order: order });
     //}
-]);
+]).triggerAction({
+    matches: /^catalog$|^catalogo$/i
+});
 
 // Export createLibrary() function
 module.exports.createLibrary = function () {

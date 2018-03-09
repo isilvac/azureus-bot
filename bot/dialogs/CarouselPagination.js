@@ -29,22 +29,22 @@ module.exports = {
             var card = new builder.HeroCard()
                 .title(cardInfo.title);
 
-            if (cardInfo.buttonUrl) {
+            if (cardInfo.buttonUrl && (cardInfo.buttonUrl != 'none')) {
                 card.buttons([
                     new builder.CardAction
-                        .openUrl(session, session.gettext(cardInfo.buttonUrl), session.gettext(cardInfo.buttonLabel))
+                        .openUrl(session, cardInfo.buttonUrl, cardInfo.buttonLabel)
                 ]);
-            }
-            if (cardInfo.imageUrl) {
+            } else if(cardInfo.imageUrl) {
                 card.buttons([
                     new builder.CardAction()
                         .type('imBack')
                         .value(session.gettext(settings.selectTemplate) + cardInfo.title)
                         .title(session.gettext(cardInfo.buttonLabel))
                 ]);
+            }
+            if (cardInfo.imageUrl) {
                 card = card.images([new builder.CardImage().url(cardInfo.imageUrl).alt(cardInfo.title)]);
             }
-
             if (cardInfo.subtitle) {
                 card = card.subtitle(cardInfo.subtitle);
             }

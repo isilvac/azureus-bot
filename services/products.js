@@ -104,7 +104,6 @@ var urbanBikes =
 var defaultBikes =[{
     name: 'Sin bicicletas por el momento',
     subtitle: 'Somos un bot al que no le alcanza la plata para tanta bicicleta...',
-    imageUrl: null
 }];
 
 var productsService = {

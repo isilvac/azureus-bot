@@ -17,8 +17,8 @@ var lib = new builder.Library('product-selection');
 // These steps are defined as a waterfall dialog,
 // but the control is done manually by calling the next func argument.
 lib.dialog('/',
-    //new SimpleWaterfallDialog([
-    [
+    new SimpleWaterfallDialog([
+    //[
         // First message
         function (session, args, next) {
             session.send('choose_category');
@@ -44,28 +44,18 @@ lib.dialog('/',
                 productMapping,
                 carouselOptions
             )(session, args, next);
-            next();
-        },
-        function (session, args, next) {
+            session.sendTyping();
             setTimeout(function () {
-                builder.Prompts.text(session, session.gettext('more'));
-            }, 1000);
+                next();//builder.Prompts.text(session, session.gettext('back2menu'));
+            }, 2000);
         },
-        function (session, results) {
-            if (results.response === 'no') {
-                builder.Prompts.text(session, session.gettext('back2menu'));
-            }
-            if (results.response === 'si') {
-                session.beginDialog('/');
-            }
-        },
-        function (session, results) {
-            if (results.response === 'menu') {
-                session.endDialog();
-            }
+        // Product selected
+        function (session, args, next) {
+            // this is last step, calling next with args will end in session.endDialogWithResult(args)
+            session.send(session.gettext('back2menu'));
+            //next({ selection: args.selected });
         }
-    //])
-    ]
+    ])
 );
 
 function categoryMapping(category) {

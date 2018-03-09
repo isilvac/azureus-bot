@@ -22,7 +22,9 @@ lib.dialog('/', [
             session.endDialog();
         }
     }
- ]);
+ ]).triggerAction({
+     matches: /^sociales$|^facebook$|^instagram$|^twitter$/i
+ })
 
 function sns(session) {
     return [

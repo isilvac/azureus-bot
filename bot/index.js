@@ -1,5 +1,6 @@
 var builder = require('botbuilder');
 var siteUrl = require('./site-url');
+var inMemoryStorage = new builder.MemoryBotStorage();
 
 var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
@@ -21,7 +22,7 @@ var bot = new builder.UniversalBot(connector,
             session.beginDialog('menu');
         }, 1000);
     }
-);
+).set('storage', inMemoryStorage);
 
 bot.dialog('greetings', [
     function (session, args, next) {
