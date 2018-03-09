@@ -1,10 +1,15 @@
 {
-    "welcome_title": "Welcome to the Contoso Flowers",
-    "welcome_subtitle": "These are the flowers you are looking for!",
-    "contoso_flowers": "Contoso Flowers",
-    "main_options_order_flowers": "Order flowers",
-    "main_options_talk_to_support": "Talk to support",
-    "main_options_settings": "Settings",
-    "help": "Help",
-    "thank_you": "Support will contact you shortly. Have a nice day :)"
+  "salute": "Hi! Welcome to Bike Store!",
+  "name_request": "What's your name?",
+  "salute_with_name": "Hi %s! Welcome to Bike Store!",
+  "welcome_title": "Bike Store Menu",
+  "welcome_subtitle": "Here's where you find your perfect bike!",
+  "bike_store": "Bike Store",
+  "main_options_catalog": "Catalog",
+  "main_options_sns": "Social Networks",
+  "main_options_stores": "Stores",
+  "main_options_settings": "Settings",
+  "help": "Help",
+  "thank_you": "Support will contact you shortly. Have a nice day :)",
+  "bye": "Bye! Have a nice day"
 }

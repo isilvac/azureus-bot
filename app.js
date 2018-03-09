@@ -61,5 +61,5 @@ app.use(function (err, req, res, next) {
 
 // Start listening
 app.listen(process.env.port || process.env.PORT || 3978, function () {
-  console.log('Web Server listening on port %s', app.get('port'));
+  console.log('Web Server listening on port %s', app.port);
 });
