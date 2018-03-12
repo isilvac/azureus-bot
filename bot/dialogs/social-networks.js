@@ -4,8 +4,10 @@ var lib = new builder.Library('social-networks');
 
 lib.dialog('/', [
     function (session, args) {
+        session.send('welcome_sns');
         var cards = sns();
 
+        session.sendTyping();
         // create reply with Carousel AttachmentLayout
         var reply = new builder.Message(session)
             .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -14,7 +16,7 @@ lib.dialog('/', [
         session.send(reply);
         session.sendTyping();
         setTimeout(function () {
-            builder.Prompts.text(session, session.gettext('back2menu'));
+            builder.Prompts.text(session, 'back2menu');
         }, 1000);
     },
     function (session, results) {
