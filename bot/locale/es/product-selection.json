@@ -8,7 +8,7 @@
   "view_bikes": "Ver bicicletas",
   "choose_this": "Ver",
   "more": "Deseas ver mas bicicletas?",
-  "back2menu": "Si deseas volver al menu, escribe \"menu\"",
+  "back2menu": "Si deseas ver el catalogo nuevamente, escribe \"catalogo\"\n\nSi quieres volver al menu, escribe \"menu\"",
   "ok": "OK",
   "bye": "OK, que tengas un buen dia"
 }
