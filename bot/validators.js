@@ -1,6 +1,7 @@
 var builder = require('botbuilder');
 
-var PhoneRegex = new RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/);
+var PhoneRegex = new RegExp(/\+?56(\s?)(\d{1}(\s?)){9}$/);
+var WebsiteRegex = new RegExp(/(http(s)?:\/\/)?([A-Za-z0-9])*(\.)?([A-Za-z0-9\-\_])*\.[com|org|net|cl]*(\/)?/);
 var EmailRegex = new RegExp(/[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
 
 var lib = new builder.Library('validators');
@@ -12,6 +13,8 @@ lib.dialog('notes', basicPrompterWithExpression(function (input) {
 lib.dialog('phonenumber', basicPrompterWithRegex(PhoneRegex));
 
 lib.dialog('email', basicPrompterWithRegex(EmailRegex));
+
+lib.dialog('url', basicPrompterWithRegex(WebsiteRegex));
 
 function basicPrompterWithRegex(regex) {
     return new builder.IntentDialog()
@@ -47,3 +50,4 @@ module.exports.createLibrary = function () {
 
 module.exports.PhoneRegex = PhoneRegex;
 module.exports.EmailRegex = EmailRegex;
+module.exports.WebsiteRegex = WebsiteRegex;

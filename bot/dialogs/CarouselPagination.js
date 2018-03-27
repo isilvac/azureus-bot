@@ -4,7 +4,7 @@ var defaultSettings = {
     showMoreTitle: 'title_show_more',
     showMoreValue: 'show_more',
     selectTemplate: 'select',
-    pageSize: 10,
+    pageSize: 5,
     unknownOption: 'unknown_option'
 };
 

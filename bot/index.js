@@ -113,6 +113,7 @@ bot.library(require('./dialogs/stores').createLibrary());
 bot.library(require('./dialogs/social-networks').createLibrary());
 bot.library(require('./dialogs/settings').createLibrary());
 bot.library(require('./dialogs/help').createLibrary());
+bot.library(require('./dialogs/feed-reader').createLibrary());
 
 // Validators
 bot.library(require('./validators').createLibrary());
