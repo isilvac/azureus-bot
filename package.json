@@ -1,24 +1,24 @@
 {
-  "name": "botbuilder-sample-contosoflowers",
+  "name": "tiaxabot-demo-bike-store",
   "version": "1.0.0",
-  "description": "Bot Builder Sample - Contoso Flowers",
+  "description": "Tiaxa Bot demo - Bike Store",
   "scripts": {
     "start": "node app.js"
   },
-  "author": "Microsoft Corp.",
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "author": "Ignacio Silva",
   "license": "MIT",
   "keywords": [
     "botbuilder",
     "bots",
     "chatbots",
-    "botbuilder-samples"
+    "tiaxab"
   ],
-  "bugs": {
-    "url": "https://github.com/Microsoft/BotBuilder-Samples/issues"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
+    "url": "https://github.com/isilvac/azureus-bot.git"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

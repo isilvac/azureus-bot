@@ -25,59 +25,57 @@ lib.dialog('getFeeds', [
     },
     function (session, results, next) {
         var urlRSS = results.response;
-        var feed = getFeeds(urlRSS,session);
+        getFeeds(urlRSS,session);
     }
 ]).triggerAction({
     matches: /^rss$|^feed$/i
 });
 
-function getFeeds(url, session) {
+async function getFeeds(url, session) {
     let parser = new Parser();
     var elements = [];
     var maxFeed = 5;
     var items = 0;
+    let feed = await parser.parseURL(url);
 
-    (async () => {
-        let feed = await parser.parseURL(url);
-        console.log(feed.title);
-        var title = subtitle = '';
-        var image = '';
-        if (feed.title == 'Colo-Colo') {
-            var image = 'http://cdn.colocolo.cl/wp-content/themes/colo-colo/assets/equipos/relato/colo-colo.png';
+    console.log(feed.title);
+    var title = subtitle = '';
+    var image = '';
+    if (feed.title == 'Colo-Colo') {
+        var image = 'http://cdn.colocolo.cl/wp-content/themes/colo-colo/assets/equipos/relato/colo-colo.png';
+    }
+    if (feed.title == 'Club Universidad de Chile') {
+        var image = 'http://uvfaesports.com/assets/images/escudos/escudo_time_850_1508439722.png';
+    }
+
+    feed.items.forEach(item => {
+        if (items == maxFeed) {
+            return;
         }
-        if (feed.title == 'Club Universidad de Chile') {
-            var image = 'http://uvfaesports.com/assets/images/escudos/escudo_time_850_1508439722.png';
+        if (item.title.length > 40) {
+            title = item.title.substring(0, 37) + '...'
+        } else {
+            title = item.title;
         }
-        
-        feed.items.forEach(item => {
-            if (items == maxFeed) {
-                return;
-            }
-            if (item.title.length > 40) {
-                title = item.title.substring(0, 37) + '...'
-            } else {
-                title = item.title;
-            }
-            if (item.contentSnippet.length > 60) {
-                subtitle = item.contentSnippet.substring(0, 57) + '...'
-            } else {
-                subtitle = item.contentSnippet;
-            }
-            elements.push(new builder.HeroCard(session)
-                .title(title)
-                .subtitle(subtitle)
-                .images([new builder.CardImage().url(image)])
-                .buttons([
-                    builder.CardAction.openUrl(session, item.link, 'Ir a Noticia')
-                ])
-            );
-        })
-        var reply = new builder.Message(session)
-            .attachmentLayout(builder.AttachmentLayout.carousel)
-            .attachments(elements);
-        session.send(reply);
-        ++items;
-    })();
+        if (item.contentSnippet.length > 60) {
+            subtitle = item.contentSnippet.substring(0, 57) + '...'
+        } else {
+            subtitle = item.contentSnippet;
+        }
+        elements.push(new builder.HeroCard(session)
+            .title(title)
+            .subtitle(subtitle)
+            .images([new builder.CardImage().url(image)])
+            .buttons([
+                builder.CardAction.openUrl(session, item.link, 'Ir a Noticia')
+            ])
+        );
+    })
+    var reply = new builder.Message(session)
+        .attachmentLayout(builder.AttachmentLayout.carousel)
+        .attachments(elements);
+    session.send(reply);
+    ++items;
 }
 
 // Export createLibrary() function
