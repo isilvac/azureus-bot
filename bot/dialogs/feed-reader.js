@@ -1,6 +1,6 @@
 var builder = require('botbuilder');
 var Parser = require('rss-parser');
-var imageRetriever = require('../../services/image-retriever');
+//var imageRetriever = require('../../services/image-retriever');
 
 var lib = new builder.Library('rss-reader');
 
@@ -36,46 +36,49 @@ async function getFeeds(url, session) {
     var elements = [];
     var maxFeed = 5;
     var items = 0;
-    let feed = await parser.parseURL(url);
+    try {
+        let feed = await parser.parseURL(url);
+        console.log(feed.title);
+        var title = subtitle = '';
+        var image = '';
+        if (feed.title == 'Colo-Colo') {
+            var image = 'http://cdn.colocolo.cl/wp-content/themes/colo-colo/assets/equipos/relato/colo-colo.png';
+        }
+        if (feed.title == 'Club Universidad de Chile') {
+            var image = 'http://uvfaesports.com/assets/images/escudos/escudo_time_850_1508439722.png';
+        }
 
-    console.log(feed.title);
-    var title = subtitle = '';
-    var image = '';
-    if (feed.title == 'Colo-Colo') {
-        var image = 'http://cdn.colocolo.cl/wp-content/themes/colo-colo/assets/equipos/relato/colo-colo.png';
+        feed.items.forEach(item => {
+            if (items == maxFeed) {
+                return;
+            }
+            if (item.title.length > 40) {
+                title = item.title.substring(0, 37) + '...'
+            } else {
+                title = item.title;
+            }
+            if (item.contentSnippet.length > 60) {
+                subtitle = item.contentSnippet.substring(0, 57) + '...'
+            } else {
+                subtitle = item.contentSnippet;
+            }
+            elements.push(new builder.HeroCard(session)
+                .title(title)
+                .subtitle(subtitle)
+                .images([new builder.CardImage().url(image)])
+                .buttons([
+                    builder.CardAction.openUrl(session, item.link, 'Ir a Noticia')
+                ])
+            );
+        })
+        var reply = new builder.Message(session)
+            .attachmentLayout(builder.AttachmentLayout.carousel)
+            .attachments(elements);
+        session.send(reply);
+        ++items;
+    } catch (err) {
+        console.error("Error en parseo de URL: " + url + "\n\n" + err);
     }
-    if (feed.title == 'Club Universidad de Chile') {
-        var image = 'http://uvfaesports.com/assets/images/escudos/escudo_time_850_1508439722.png';
-    }
-
-    feed.items.forEach(item => {
-        if (items == maxFeed) {
-            return;
-        }
-        if (item.title.length > 40) {
-            title = item.title.substring(0, 37) + '...'
-        } else {
-            title = item.title;
-        }
-        if (item.contentSnippet.length > 60) {
-            subtitle = item.contentSnippet.substring(0, 57) + '...'
-        } else {
-            subtitle = item.contentSnippet;
-        }
-        elements.push(new builder.HeroCard(session)
-            .title(title)
-            .subtitle(subtitle)
-            .images([new builder.CardImage().url(image)])
-            .buttons([
-                builder.CardAction.openUrl(session, item.link, 'Ir a Noticia')
-            ])
-        );
-    })
-    var reply = new builder.Message(session)
-        .attachmentLayout(builder.AttachmentLayout.carousel)
-        .attachments(elements);
-    session.send(reply);
-    ++items;
 }
 
 // Export createLibrary() function
