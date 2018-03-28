@@ -6,8 +6,13 @@ var url  = require('url');
 //getImage('https://www.udechile.cl/primer-equipo/guillermo-hoyos-palpita-el-amistoso-con-river-plate-es-un-rival-de-nivel-y-jerarquia/');
 //getImage('http://www.colocolo.cl/empate-ante-ohiggins-en-amistoso-en-la-ruca/');
 
-function getImage(rssUrl) {
-    var parsedUrl = url.parse(rssUrl);
+async function getImage(rssUrl) {
+    var parsedUrl;
+    try {
+        parsedUrl = await url.parse(rssUrl);
+    } catch (err) {
+        console.error('Error al recuperar imagen de link: ' + rssUrl + "\n\n" + err);
+    }
     if (parsedUrl.host == null) {
         console.log('URL parsed Error.(' + rssUrl + ')');
         return;
@@ -30,16 +35,17 @@ function getImage(rssUrl) {
 
     var html = [];
     request.on('response', function (res) {
+
         res.on('data', function (chunk) {
             html.push(chunk);
         });
+
         res.on('end', function () {
             var myhtmlparser = new MyHtmlParser(parsedUrl);
             myhtmlparser.parse(html.join(''));
             myhtmlparser.getImageElements({ tagName: 'img' });
-            var imageURL = myhtmlparser.url;
-            //console.log(imageURL);
-            return imageURL;
+
+            return myhtmlparser.url;
         });
     });
 };

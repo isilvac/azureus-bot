@@ -1,6 +1,6 @@
 var builder = require('botbuilder');
 var Parser = require('rss-parser');
-//var imageRetriever = require('../../services/image-retriever');
+var imageRetriever = require('../../services/image-retriever');
 
 var lib = new builder.Library('rss-reader');
 
@@ -35,19 +35,16 @@ lib.dialog('getFeeds', [
         var club = clubData.filter(function (obj) {
             return obj.nombre == results.response.entity;
         });
-        var url = club[0].url;
-        var img = club[0].img;
-        getFeeds(url, img, session);
+        getFeeds(club[0].url, club[0].img, session);
     }
 ]).triggerAction({
     matches: /^rss$|^feed$/i
 });
 
-async function getFeeds(url, img, session) {
+async function getFeeds(url, image, session) {
     let parser = new Parser();
     var elements = [];
     var maxFeed = 5;
-    var items = 0;
     var feed;
 
     try {
@@ -57,10 +54,9 @@ async function getFeeds(url, img, session) {
     }
     console.log(feed.title);
     var title = subtitle = '';
-    var image = img;
 
     feed.items.forEach(item => {
-        if (items == maxFeed) {
+        if (elements.length == maxFeed) {
             return;
         }
         if (item.title.length > 50) {
@@ -76,7 +72,7 @@ async function getFeeds(url, img, session) {
             }
         }
         elements.push(new builder.HeroCard(session)
-            .title(title)
+        .title(title)
             .subtitle(subtitle)
             .images([new builder.CardImage().url(image)])
             .buttons([
@@ -88,7 +84,6 @@ async function getFeeds(url, img, session) {
         .attachmentLayout(builder.AttachmentLayout.carousel)
         .attachments(elements);
     session.send(reply);
-    ++items;
 }
 
 // Export createLibrary() function
