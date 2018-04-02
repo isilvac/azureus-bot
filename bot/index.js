@@ -114,6 +114,7 @@ bot.library(require('./dialogs/social-networks').createLibrary());
 bot.library(require('./dialogs/settings').createLibrary());
 bot.library(require('./dialogs/help').createLibrary());
 bot.library(require('./dialogs/feed-reader').createLibrary());
+bot.library(require('./dialogs/twitter-reader').createLibrary());
 
 // Validators
 bot.library(require('./validators').createLibrary());
