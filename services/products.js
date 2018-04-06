@@ -6,27 +6,27 @@ var allCategories =
     [{
         name: 'MONTANA',
         subtitle: 'Escapa a la montana!',
-        imageUrl: 'http://www.scottchile.com/imagenes/bannermontana.jpg'
+        imageUrl: 'https://dfp2hfrf3mn0u.cloudfront.net/MTB/MTB-Bike-Categ-Page-530x300_231932_jpg_original_1.jpg'
     },
     {
         name: 'CARRETERA',
         subtitle: 'Vuela sobre el asfalto...',
-        imageUrl: 'http://www.scottchile.com/imagenes/bannercarretera.jpg'
+        imageUrl: 'https://dfp2hfrf3mn0u.cloudfront.net/Roa/Road-Bike-Categ-Page-530x300_231933_jpg_original_1.jpg'
     },
     {
         name: 'URBANAS',
         subtitle: 'Muevete en la ciudad',
-        imageUrl: 'http://www.scottchile.com/imagenes/bannercityurban.jpg'
+        imageUrl: 'https://dfp2hfrf3mn0u.cloudfront.net/CIT/CITY-Bike-Categ-Page-530x300_231930_jpg_original_1.jpg'
     },
     {
-        name: 'MUJER',
-        subtitle: 'Para ellas',
-        imageUrl: 'http://www.scottchile.com/imagenes/bannermujer.jpg'
+        name: 'E-BIKES',
+        subtitle: 'Bicicletas electricas',
+        imageUrl: 'https://dfp2hfrf3mn0u.cloudfront.net/E-B/E-Bike-Bike-Categ-Page-530x300_231931_jpg_original_1.jpg'
     },
     {
         name: 'JUNIOR',
         subtitle: 'Para los mas pequenos de la casa',
-        imageUrl: 'http://www.scottchile.com/imagenes/bannerjunior.jpg'
+        imageUrl: 'https://dfp2hfrf3mn0u.cloudfront.net/kid/kids-and-family-180702_original_1.jpg'
     }];
 
 var mountainBikes =

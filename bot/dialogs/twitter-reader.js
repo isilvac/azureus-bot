@@ -21,7 +21,7 @@ var clubData = [
 
 lib.dialog('twitter',[
     function (session, args) {
-        var text = 'Dime el sitio que quieres ver';
+        var text = 'Dime la cuenta Twitter que quieres ver';
         var clubs = ['Colo Colo', 'Universidad de Chile', 'Universidad Catolica'];
         if (args && args.reprompt) {
             text = 'Elige dentro de las opciones';
