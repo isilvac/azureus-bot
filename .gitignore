@@ -1,0 +1,4 @@
+node_modules/
+azuredeploy.json
+.vscode/
+.env

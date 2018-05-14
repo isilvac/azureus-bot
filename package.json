@@ -23,15 +23,15 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
-    "botbuilder": "^3.14.0",
+    "botbuilder": "^3.15.0",
     "botbuilder-location": "^2.0.0",
     "dotenv-extended": "^1.0.4",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "htmlparser2": "^3.9.2",
-    "lodash": "^4.17.5",
-    "pug": "^2.0.0-rc.4",
+    "lodash": "^4.17.10",
+    "pug": "^2.0.3",
     "rss-parser": "^3.1.2",
-    "serve-favicon": "^2.4.5",
+    "serve-favicon": "^2.5.0",
     "twitter-node-client": "0.0.6",
     "uuid": "^3.2.1"
   }
